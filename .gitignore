@@ -22,7 +22,7 @@
 *.zip
 *.tar.gz
 *.rar
-.gitignore
+
 
 ### STS ###
 .apt_generated
@@ -50,3 +50,4 @@
 /.nb-gradle/
 
 
+*.gitignore
