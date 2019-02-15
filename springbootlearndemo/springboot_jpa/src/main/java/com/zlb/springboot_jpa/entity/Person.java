@@ -14,6 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity //1
+@NamedQuery(name="Person.withNameAndAddressQuery2",query = "select p from Person p where p.name = ?1 and p.address = ?2")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 5918727834473026681L;
