@@ -6,7 +6,11 @@ import com.zlb.springboot_jpa.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,6 +20,11 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @PostMapping("/send/{msg}")
+    public  void  sendMessage(@PathVariable String  msg){
+
+            personService.sendMessage(msg);
+    }
 
     @PostMapping("/save")
     public String save(@RequestBody Person person) {
@@ -103,7 +112,6 @@ public class PersonController {
      */
     @GetMapping("/sort")
     public List<Person> sort(){
-
         return personService.sort();
     }
 
@@ -114,5 +122,20 @@ public class PersonController {
     @GetMapping("/page")
     public Page<Person> personPage(){
         return personService.page();
+    }
+
+    /**
+     * cvs 文件导出
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("/cvs")
+    public void expStream() throws IOException {
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getResponse();
+        //设置response 头信息
+        response.setContentType("application/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=personList.csv");
+        personService.getCvs(response);
     }
 }

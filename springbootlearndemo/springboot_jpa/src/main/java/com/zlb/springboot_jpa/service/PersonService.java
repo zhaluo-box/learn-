@@ -3,6 +3,8 @@ package com.zlb.springboot_jpa.service;
 import com.zlb.springboot_jpa.entity.Person;
 import org.springframework.data.domain.Page;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public interface PersonService {
@@ -63,4 +65,8 @@ public interface PersonService {
     List<Person> sort();
 
     Page<Person> page();
+
+    void getCvs(HttpServletResponse response) throws IOException;
+
+    void sendMessage(String  msg);
 }

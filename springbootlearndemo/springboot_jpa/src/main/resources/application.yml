@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 8080
 
 spring:
   datasource:
@@ -41,6 +41,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
+  rabbitmq:
+    username: admin
+    password:  admin
 thymeleaf:
   cache: false
 
